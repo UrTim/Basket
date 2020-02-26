@@ -35,6 +35,7 @@ public class basketAdapter extends RecyclerView.Adapter<basketAdapter.ItemsViewH
         Basket basketItem = basketList.get(position);
 
         holder.basketItemName.setText(basketItem.getItemName());
+        holder.basketItemID.setText("" + basketItem.getId());
     }
 
     @Override
@@ -45,11 +46,13 @@ public class basketAdapter extends RecyclerView.Adapter<basketAdapter.ItemsViewH
     class ItemsViewHolder extends RecyclerView.ViewHolder{
 
         TextView basketItemName;
+        TextView basketItemID;
 
         public ItemsViewHolder(@NonNull View itemView) {
             super(itemView);
 
             basketItemName = (TextView) itemView.findViewById(R.id.textViewBasketName);
+            basketItemID = (TextView) itemView.findViewById(R.id.textViewBasketID);
         }
     }
 }

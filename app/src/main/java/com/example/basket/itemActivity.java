@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -40,7 +41,6 @@ public class itemActivity extends AppCompatActivity implements SearchView.OnQuer
     ItemsAdapter itemsAdapter;
     List<Items> itemsList;
     private TextView textViewName;
-    private Button buttonAdd;
     private final static String TAG = "my app";
 
 
@@ -52,9 +52,6 @@ public class itemActivity extends AppCompatActivity implements SearchView.OnQuer
         setContentView(R.layout.activity_item);
 
         textViewName = (TextView) findViewById(R.id.textViewName);
-        buttonAdd = (Button) findViewById(R.id.buttonAdd);
-
-
 
         itemsList = new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.recyclerViewitem);
@@ -81,12 +78,6 @@ public class itemActivity extends AppCompatActivity implements SearchView.OnQuer
                         itemsList.add(item);
                     }
                     itemsAdapter = new ItemsAdapter(itemActivity.this, itemsList);
-//                    itemsAdapter.setonAddListener(new ItemsAdapter.onAddListener() {
-////                        @Override
-////                        public void onAddClick(int position) {
-////                            addToBasket();
-////                        }
-////                    });
                     recyclerView.setAdapter(itemsAdapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -103,38 +94,38 @@ public class itemActivity extends AppCompatActivity implements SearchView.OnQuer
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
-   /* public void addToBasket() {
-        Log.d(TAG, "addToBasket: adding");
-
-        final String itemName = textViewName.getText().toString();
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, ADDTOBASKET_URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    Toast.makeText(getApplicationContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(itemActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("itemName", itemName);
-                return params;
-            }
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-    }*/
+//    public void addToBasket() {
+////        Log.d(TAG, "addToBasket: adding");
+////
+////        final String itemName = textViewName.getText().toString();
+////
+////        StringRequest stringRequest = new StringRequest(Request.Method.POST, ADDTOBASKET_URL, new Response.Listener<String>() {
+////            @Override
+////            public void onResponse(String response) {
+////                try {
+////                    JSONObject jsonObject = new JSONObject(response);
+////                    Toast.makeText(getApplicationContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+////                } catch (JSONException e) {
+////                    e.printStackTrace();
+////                }
+////            }
+////        }, new Response.ErrorListener() {
+////            @Override
+////            public void onErrorResponse(VolleyError error) {
+////                Toast.makeText(itemActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+////            }
+////        }) {
+////            @Override
+////            protected Map<String, String> getParams() throws AuthFailureError {
+////                Map<String, String> params = new HashMap<>();
+////                params.put("itemName", itemName);
+////                return params;
+////            }
+////        };
+////
+////        RequestQueue requestQueue = Volley.newRequestQueue(this);
+////        requestQueue.add(stringRequest);
+////    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -162,4 +153,5 @@ public class itemActivity extends AppCompatActivity implements SearchView.OnQuer
         itemsAdapter.updateList(newList);
         return true;
     }
+
 }
